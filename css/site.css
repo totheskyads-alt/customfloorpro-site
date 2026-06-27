@@ -83,6 +83,7 @@ h1 .ln{display:block;overflow:hidden}
 h1 .ln > span{display:block;will-change:transform}
 h1 em{font-style:italic;font-weight:400;color:var(--gold)}
 .hero-foot{display:flex;justify-content:space-between;align-items:center;margin-top:48px;flex-wrap:wrap;gap:24px}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;align-items:center}
 .scrollcue{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:13px;letter-spacing:.04em}
 .scrollcue .bar{width:54px;height:1px;background:var(--line);position:relative;overflow:hidden}
 .scrollcue .bar::after{content:"";position:absolute;inset:0;background:var(--gold);transform:translateX(-100%);animation:slide 2.2s var(--e-io) infinite}
