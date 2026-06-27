@@ -40,18 +40,6 @@
     gsap.ticker.lagSmoothing(0);
   }
 
-  /* custom cursor */
-  var cur=document.querySelector('.cur'), dot=document.querySelector('.cur-d');
-  if (cur && dot){
-    var mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
-    window.addEventListener('mousemove',function(e){ mx=e.clientX;my=e.clientY; gsap.set(dot,{x:mx,y:my}); });
-    gsap.ticker.add(function(){ cx+=(mx-cx)*0.16; cy+=(my-cy)*0.16; gsap.set(cur,{x:cx,y:cy}); });
-    document.querySelectorAll('a,button,[data-cursor]').forEach(function(el){
-      el.addEventListener('mouseenter',function(){cur.classList.add('grow');});
-      el.addEventListener('mouseleave',function(){cur.classList.remove('grow');});
-    });
-  }
-
   /* magnetic */
   document.querySelectorAll('[data-magnetic]').forEach(function(el){
     el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect();
