@@ -28,6 +28,21 @@
     });
   }
 
+  /* gapless grid masonry — sizes each item to its image height */
+  (function(){
+    var grids = document.querySelectorAll('.masonry');
+    if (!grids.length) return;
+    var ROW = 10, GAP = 14;
+    function span(a){ if(!a) return; var img = a.querySelector('img'); if(!img) return; var h = img.getBoundingClientRect().height; if(!h) return; a.style.gridRowEnd = 'span ' + Math.max(1, Math.ceil((h + GAP) / (ROW + GAP))); }
+    function all(){ grids.forEach(function(g){ g.querySelectorAll('a').forEach(span); }); }
+    document.querySelectorAll('.masonry img').forEach(function(img){
+      if (img.complete && img.naturalWidth) span(img.closest('a'));
+      else img.addEventListener('load', function(){ span(img.closest('a')); });
+    });
+    var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(all, 150); });
+    window.addEventListener('load', all);
+  })();
+
   var hasGSAP = window.gsap && window.ScrollTrigger;
   if (reduce || !hasGSAP) return;
   gsap.registerPlugin(ScrollTrigger);
