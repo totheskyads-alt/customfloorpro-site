@@ -359,6 +359,32 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
   .mat{width:min(86vw,420px);height:clamp(340px,116vw,440px)}
   .car-btn{width:46px;height:46px;font-size:22px}
 }
+/* How it works */
+.how-grid{display:grid;gap:14px;margin-top:46px}
+.how-step{display:grid;grid-template-columns:60px 1fr;gap:22px;align-items:start;padding:24px 28px;border:1px solid var(--line);border-radius:18px;background:oklch(0.955 0.013 85 / .018)}
+.how-step .hn{font-size:30px;font-weight:700;line-height:1;font-variant-numeric:tabular-nums;color:var(--gold)}
+.how-step:nth-child(2) .hn{color:var(--clay)}
+.how-step:nth-child(3) .hn{color:var(--steel)}
+.how-step:nth-child(4) .hn{color:var(--sun)}
+.how-step h3{font-size:19px;font-weight:600;margin:1px 0 7px;color:var(--cream)}
+.how-step p{font-size:15px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
+
+/* FAQ */
+.faq-list{display:grid;gap:10px;margin-top:46px;max-width:920px}
+.faq-item{border:1px solid var(--line);border-radius:18px;background:oklch(0.955 0.013 85 / .018);overflow:hidden}
+.faq-item summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:18px;padding:22px 26px;font-size:17px;font-weight:600;color:var(--cream);transition:color .2s}
+.faq-item summary::-webkit-details-marker{display:none}
+.faq-item summary:hover{color:var(--gold)}
+.faq-item[open] summary{color:var(--gold)}
+.faq-item summary .fic{flex:none;width:30px;height:30px;border:1px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:24px;line-height:0;transition:transform .25s}
+.faq-item[open] summary .fic{transform:rotate(45deg)}
+.faq-item .faq-a{padding:0 26px 23px;font-size:15px;line-height:1.65;color:var(--muted);max-width:70ch}
+@media (max-width:640px){
+  .how-step{grid-template-columns:46px 1fr;gap:16px;padding:20px 20px}
+  .how-step .hn{font-size:25px}
+  .faq-item summary{padding:18px 20px;font-size:15.5px}
+  .faq-item .faq-a{padding:0 20px 19px}
+}
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .hero-video{display:none}
