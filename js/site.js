@@ -1,6 +1,7 @@
 /* Custom Flooring Projects — shared interactions */
 (function(){
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var isDesktop = window.matchMedia('(min-width: 1025px) and (pointer: fine)').matches;
 
   /* nav scrolled state */
   var nav = document.getElementById('nav');
@@ -12,23 +13,18 @@
   /* mobile menu */
   var burger = document.querySelector('.burger');
   if (burger){
-    burger.addEventListener('click', function(){
-      document.documentElement.classList.toggle('menu-open');
-    });
+    burger.addEventListener('click', function(){ document.documentElement.classList.toggle('menu-open'); });
     document.querySelectorAll('.mobile-menu a').forEach(function(a){
       a.addEventListener('click', function(){ document.documentElement.classList.remove('menu-open'); });
     });
   }
 
-  /* contact form -> graceful note (FormSubmit handles the POST) */
-  var qf = document.querySelector('form.quote');
-  if (qf){
-    qf.addEventListener('submit', function(){
-      var b = qf.querySelector('.btn span'); if (b) b.textContent = 'Sending…';
-    });
-  }
+  /* form submit note */
+  document.querySelectorAll('form.quote, form.cta-quote').forEach(function(qf){
+    qf.addEventListener('submit', function(){ var b = qf.querySelector('.btn span'); if (b) b.textContent = 'Sending…'; });
+  });
 
-  /* hero background video — ensure autoplay (muted) across browsers */
+  /* hero background video — ensure muted autoplay */
   (function(){
     var hv = document.querySelector('.hero-video');
     if (!hv) return;
@@ -39,21 +35,41 @@
     window.addEventListener('pointerdown', tryPlay, { once:true });
   })();
 
-  /* gapless grid masonry — sizes each item to its image height */
+  /* lightweight reveals via IntersectionObserver (no scroll handlers) */
+  if (!reduce && 'IntersectionObserver' in window){
+    document.documentElement.classList.add('reveals');
+    var rio = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
+    document.querySelectorAll('.reveal-fade, .reveal-line').forEach(function(el){ rio.observe(el); });
+  }
+
+  /* gapless grid masonry — sizes each item to its image height (once per image) */
   (function(){
     var grids = document.querySelectorAll('.masonry');
     if (!grids.length) return;
     var ROW = 10, GAP = 14;
-    var rt;
-    function refreshST(){ if (window.ScrollTrigger){ clearTimeout(rt); rt = setTimeout(function(){ ScrollTrigger.refresh(); }, 180); } }
     function span(a){ if(!a) return; var img = a.querySelector('img'); if(!img) return; var h = img.getBoundingClientRect().height; if(!h) return; a.style.gridRowEnd = 'span ' + Math.max(1, Math.ceil((h + GAP) / (ROW + GAP))); }
-    function all(){ grids.forEach(function(g){ g.querySelectorAll('a').forEach(span); }); refreshST(); }
+    function all(){ grids.forEach(function(g){ g.querySelectorAll('a').forEach(span); }); }
     document.querySelectorAll('.masonry img').forEach(function(img){
       if (img.complete && img.naturalWidth) span(img.closest('a'));
-      else img.addEventListener('load', function(){ span(img.closest('a')); refreshST(); });
+      else img.addEventListener('load', function(){ span(img.closest('a')); });
     });
-    var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(all, 150); });
+    var t; window.addEventListener('resize', function(){ clearTimeout(t); t = setTimeout(all, 200); }, {passive:true});
     window.addEventListener('load', all);
+  })();
+
+  /* lazy-load TikTok embed script only when the video grid nears the viewport */
+  (function(){
+    var anchor = document.querySelector('.vid-grid');
+    if (!anchor || !('IntersectionObserver' in window)) {
+      if (document.querySelector('.tiktok-embed')){ var s0=document.createElement('script'); s0.async=true; s0.src='https://www.tiktok.com/embed.js'; document.body.appendChild(s0); }
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      if (entries[0].isIntersecting){ var s=document.createElement('script'); s.async=true; s.src='https://www.tiktok.com/embed.js'; document.body.appendChild(s); io.disconnect(); }
+    }, { rootMargin: '500px' });
+    io.observe(anchor);
   })();
 
   /* projects carousel — prev/next buttons + swipe */
@@ -73,15 +89,11 @@
       requestAnimationFrame(frame);
     }
     function go(dir){ var s = step(); animateTo((Math.round(track.scrollLeft / s) + dir) * s); }
-    function update(){
-      if (!prev || !next) return;
-      prev.disabled = track.scrollLeft <= 4;
-      next.disabled = track.scrollLeft >= maxScroll() - 4;
-    }
+    function update(){ if (!prev || !next) return; prev.disabled = track.scrollLeft <= 4; next.disabled = track.scrollLeft >= maxScroll() - 4; }
     if (prev) prev.addEventListener('click', function(){ go(-1); });
     if (next) next.addEventListener('click', function(){ go(1); });
     track.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update);
+    window.addEventListener('resize', update, { passive: true });
     update();
   })();
 
@@ -89,67 +101,49 @@
   if (reduce || !hasGSAP) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  /* smooth scroll */
-  var lenis = window.Lenis ? new Lenis({duration:1.1, easing:function(t){return Math.min(1,1.001-Math.pow(2,-10*t));}}) : null;
-  if (lenis){
+  /* smooth scroll — DESKTOP ONLY (Lenis hurts touch scrolling) */
+  if (isDesktop && window.Lenis){
+    var lenis = new Lenis({ duration:1.1, easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10*t)); } });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add(function(t){ lenis.raf(t*1000); });
     gsap.ticker.lagSmoothing(0);
   }
 
-  /* magnetic */
-  document.querySelectorAll('[data-magnetic]').forEach(function(el){
-    el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect();
-      gsap.to(el,{x:(e.clientX-r.left-r.width/2)*0.3,y:(e.clientY-r.top-r.height/2)*0.4,duration:.5,ease:'power3.out'}); });
-    el.addEventListener('mouseleave',function(){ gsap.to(el,{x:0,y:0,duration:.6,ease:'elastic.out(1,0.4)'}); });
-  });
-
-  /* hero headline mask */
-  if (document.querySelector('h1 .ln > span')){
-    gsap.set('h1 .ln > span',{yPercent:115});
-    gsap.to('h1 .ln > span',{yPercent:0,duration:1.25,ease:'expo.out',stagger:0.1,delay:0.12});
+  /* magnetic buttons (pointer devices) */
+  if (isDesktop){
+    document.querySelectorAll('[data-magnetic]').forEach(function(el){
+      el.addEventListener('mousemove',function(e){ var r=el.getBoundingClientRect();
+        gsap.to(el,{x:(e.clientX-r.left-r.width/2)*0.3,y:(e.clientY-r.top-r.height/2)*0.4,duration:.5,ease:'power3.out'}); });
+      el.addEventListener('mouseleave',function(){ gsap.to(el,{x:0,y:0,duration:.6,ease:'elastic.out(1,0.4)'}); });
+    });
   }
 
-  /* reveals */
-  gsap.utils.toArray('.reveal-line > span').forEach(function(s){
-    gsap.set(s,{yPercent:115});
-    gsap.to(s,{yPercent:0,duration:1.1,ease:'expo.out',scrollTrigger:{trigger:s,start:'top 94%',once:true,invalidateOnRefresh:true}});
-  });
-  gsap.utils.toArray('.reveal-fade').forEach(function(el){
-    gsap.set(el,{y:32,opacity:0});
-    gsap.to(el,{y:0,opacity:1,duration:1,ease:'power3.out',scrollTrigger:{trigger:el,start:'top 94%',once:true,invalidateOnRefresh:true}});
-  });
+  /* hero headline mask (one-time on load) */
+  if (document.querySelector('h1 .ln > span')){
+    gsap.set('h1 .ln > span',{yPercent:115});
+    gsap.to('h1 .ln > span',{yPercent:0,duration:1.2,ease:'expo.out',stagger:0.1,delay:0.1});
+  }
 
-  /* parallax */
-  gsap.utils.toArray('[data-parallax]').forEach(function(el){
-    var amt=parseFloat(el.getAttribute('data-parallax'))||0.12;
-    gsap.to(el,{yPercent:amt*100,ease:'none',
-      scrollTrigger:{trigger:el.closest('section')||el.closest('header')||el,start:'top bottom',end:'bottom top',scrub:true}});
-  });
+  /* parallax — DESKTOP ONLY (scrub work janks on mobile) */
+  if (isDesktop){
+    gsap.utils.toArray('[data-parallax]').forEach(function(el){
+      var amt=parseFloat(el.getAttribute('data-parallax'))||0.12;
+      gsap.to(el,{yPercent:amt*100,ease:'none',
+        scrollTrigger:{trigger:el.closest('section')||el.closest('header')||el,start:'top bottom',end:'bottom top',scrub:true}});
+    });
+    gsap.utils.toArray('.figure .img').forEach(function(img){
+      gsap.fromTo(img,{scale:1.12},{scale:1,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:img,start:'top 88%',once:true}});
+    });
+  } else {
+    gsap.utils.toArray('.figure .img').forEach(function(img){ gsap.set(img,{scale:1}); });
+  }
 
-  /* figure scale-in */
-  gsap.utils.toArray('.figure .img').forEach(function(img){
-    gsap.to(img,{scale:1,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:img,start:'top 88%'}});
-  });
-
-  /* counters (data-to) */
+  /* counters */
   gsap.utils.toArray('.count').forEach(function(el){
     var to=parseFloat(el.getAttribute('data-to')), dec=parseInt(el.getAttribute('data-dec')||'0',10), obj={v:0};
-    gsap.to(obj,{v:to,duration:1.8,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 92%'},
+    gsap.to(obj,{v:to,duration:1.8,ease:'power2.out',scrollTrigger:{trigger:el,start:'top 92%',once:true},
       onUpdate:function(){ el.textContent = dec? obj.v.toFixed(dec) : Math.round(obj.v).toLocaleString(); }});
   });
 
-  /* safety net: never leave in-viewport text stuck hidden if a trigger mis-fires */
-  function revealSafety(){
-    gsap.utils.toArray('.reveal-fade, .reveal-line > span').forEach(function(el){
-      var r = el.getBoundingClientRect();
-      if (r.top < innerHeight * 0.98 && r.bottom > 0 && parseFloat(getComputedStyle(el).opacity) < 0.05){
-        gsap.to(el,{opacity:1,y:0,yPercent:0,duration:.5,overwrite:true});
-      }
-    });
-  }
-  var rsf;
-  window.addEventListener('scroll', function(){ clearTimeout(rsf); rsf = setTimeout(revealSafety, 120); }, {passive:true});
-  window.addEventListener('load', function(){ ScrollTrigger.refresh(); setTimeout(revealSafety, 300); });
-  setTimeout(function(){ ScrollTrigger.refresh(); revealSafety(); }, 800);
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
 })();
