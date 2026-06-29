@@ -9,6 +9,8 @@
   --gold:oklch(0.78 0.115 75);
   --gold-deep:oklch(0.60 0.10 68);
   --brass:oklch(0.72 0.085 72);
+  --clay:oklch(0.60 0.15 33);
+  --steel:oklch(0.64 0.10 250);
   --line:oklch(0.34 0.02 60 / .6);
   --line-soft:oklch(0.34 0.02 60 / .35);
   --e-out:cubic-bezier(0.16,1,0.3,1);
@@ -74,7 +76,7 @@ nav.scrolled .wrap{height:68px}
 .hero-photo{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 .hero-veil{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom, oklch(0.14 0.012 58 / .62) 0%, oklch(0.14 0.012 58 / .4) 40%, oklch(0.14 0.012 58 / .9) 100%)}
-.hero-bg{position:absolute;inset:0;z-index:3;background:radial-gradient(80% 60% at 75% 15%, oklch(0.78 0.115 75 / .14), transparent 60%),radial-gradient(70% 70% at 12% 95%, oklch(0.30 0.02 60 / .4), transparent 55%)}
+.hero-bg{position:absolute;inset:0;z-index:3;background:radial-gradient(80% 60% at 75% 15%, oklch(0.78 0.115 75 / .14), transparent 60%),radial-gradient(55% 55% at 8% 18%, oklch(0.64 0.10 250 / .06), transparent 60%),radial-gradient(55% 55% at 92% 92%, oklch(0.60 0.15 33 / .05), transparent 60%),radial-gradient(70% 70% at 12% 95%, oklch(0.30 0.02 60 / .4), transparent 55%)}
 .grain{position:absolute;inset:0;z-index:4;opacity:.5;pointer-events:none;background-image:radial-gradient(oklch(1 0 0 / .04) 1px, transparent 1px);background-size:3px 3px}
 .hero .wrap{position:relative;z-index:5}
 .hero h1{font-size:clamp(30px,6.3vw,82px);line-height:1.04;text-wrap:balance;text-shadow:0 2px 30px oklch(0.1 0.012 60 / .55)}
@@ -105,7 +107,9 @@ h1 em{font-style:italic;font-weight:400;color:var(--gold)}
 .marq{border-block:1px solid var(--line);padding:26px 0;overflow:hidden;white-space:nowrap;background:var(--bg-2)}
 .marq-in{display:inline-flex;gap:54px;align-items:center;animation:marq 32s linear infinite}
 .marq span{font-family:"Plus Jakarta Sans",sans-serif;font-style:italic;font-weight:400;font-size:clamp(22px,3vw,34px);color:var(--cream)}
-.marq .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none}
+.marq .dot{width:8px;height:8px;border-radius:50%;background:var(--gold);flex:none;opacity:.85}
+.marq i.dot:nth-of-type(3n+2){background:var(--steel)}
+.marq i.dot:nth-of-type(3n+3){background:var(--clay)}
 @keyframes marq{to{transform:translateX(-50%)}}
 
 /* sections */
@@ -248,7 +252,7 @@ form.quote .hint{font-size:12.5px;color:var(--faint);margin-top:14px;text-align:
 
 /* CTA */
 .cta{text-align:center;position:relative;overflow:hidden}
-.cta .glow{position:absolute;left:50%;top:60%;width:120vw;height:120vw;transform:translate(-50%,-50%);z-index:0;background:radial-gradient(circle,oklch(0.78 0.115 75 / .12),transparent 42%);pointer-events:none}
+.cta .glow{position:absolute;left:50%;top:60%;width:120vw;height:120vw;transform:translate(-50%,-50%);z-index:0;background:radial-gradient(circle,oklch(0.78 0.115 75 / .12),transparent 42%),radial-gradient(circle at 30% 40%,oklch(0.64 0.10 250 / .05),transparent 38%);pointer-events:none}
 .cta .wrap{position:relative;z-index:2}
 .cta h2{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(40px,8vw,112px);line-height:.96;letter-spacing:-.035em;margin-bottom:24px}
 .cta h2 em{font-style:italic;color:var(--gold)}
