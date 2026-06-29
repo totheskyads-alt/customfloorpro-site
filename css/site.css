@@ -206,6 +206,15 @@ section{position:relative}
 /* video / social */
 .vid-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px;align-items:start}
 .vid-grid .tiktok-embed{margin:0!important;min-width:0!important;width:100%!important;border-radius:14px;overflow:hidden}
+.tt-card{position:relative;display:block;width:100%;aspect-ratio:4/5;border:0;padding:0;margin:0;border-radius:14px;overflow:hidden;cursor:pointer;background:var(--bg-2)}
+.tt-card img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--e-out)}
+.tt-card:hover img{transform:scale(1.05)}
+.tt-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top, oklch(0.12 0.01 60 / .55), transparent 55%)}
+.tt-play{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:60px;height:60px;border-radius:50%;background:oklch(1 0 0 / .92);display:flex;align-items:center;justify-content:center;z-index:2;transition:transform .3s var(--e-out),background .3s var(--e-out)}
+.tt-play::before{content:"";border-left:17px solid var(--bg);border-top:11px solid transparent;border-bottom:11px solid transparent;margin-left:4px}
+.tt-card:hover .tt-play{transform:translate(-50%,-50%) scale(1.08);background:var(--gold)}
+.tt-views{position:absolute;left:13px;bottom:13px;z-index:2;display:inline-flex;align-items:center;gap:6px;color:var(--cream);font-size:14px}
+.tt-views b{color:var(--gold);font-weight:700;font-size:16px}
 .vid{display:flex;flex-direction:column;gap:12px}
 .vviews{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;background:var(--bg-2);border:1px solid var(--line);color:var(--cream);font-size:15px;padding:9px 16px 9px 10px;border-radius:100px}
 .vviews .pl{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:var(--gold);color:var(--bg);font-size:9px;padding-left:2px}

@@ -59,17 +59,22 @@
     window.addEventListener('load', all);
   })();
 
-  /* lazy-load TikTok embed script only when the video grid nears the viewport */
+  /* TikTok facade — load the real player only when a card is clicked */
   (function(){
-    var anchor = document.querySelector('.vid-grid');
-    if (!anchor || !('IntersectionObserver' in window)) {
-      if (document.querySelector('.tiktok-embed')){ var s0=document.createElement('script'); s0.async=true; s0.src='https://www.tiktok.com/embed.js'; document.body.appendChild(s0); }
-      return;
+    var cards = document.querySelectorAll('.tt-card');
+    if (!cards.length) return;
+    function play(card){
+      var id = card.getAttribute('data-id');
+      var bq = document.createElement('blockquote');
+      bq.className = 'tiktok-embed';
+      bq.setAttribute('cite', 'https://www.tiktok.com/@customfloorpro/video/' + id);
+      bq.setAttribute('data-video-id', id);
+      bq.style.cssText = 'max-width:605px;min-width:325px;margin:0';
+      bq.innerHTML = '<section><a href="https://www.tiktok.com/@customfloorpro/video/' + id + '" target="_blank" rel="noopener">@customfloorpro</a></section>';
+      card.replaceWith(bq);
+      var s = document.createElement('script'); s.async = true; s.src = 'https://www.tiktok.com/embed.js'; document.body.appendChild(s);
     }
-    var io = new IntersectionObserver(function(entries){
-      if (entries[0].isIntersecting){ var s=document.createElement('script'); s.async=true; s.src='https://www.tiktok.com/embed.js'; document.body.appendChild(s); io.disconnect(); }
-    }, { rootMargin: '500px' });
-    io.observe(anchor);
+    cards.forEach(function(card){ card.addEventListener('click', function(){ play(card); }); });
   })();
 
   /* projects carousel — prev/next buttons + swipe */
