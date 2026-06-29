@@ -77,7 +77,7 @@ nav.scrolled .wrap{height:68px}
 .hero-bg{position:absolute;inset:0;z-index:3;background:radial-gradient(80% 60% at 75% 15%, oklch(0.78 0.115 75 / .14), transparent 60%),radial-gradient(70% 70% at 12% 95%, oklch(0.30 0.02 60 / .4), transparent 55%)}
 .grain{position:absolute;inset:0;z-index:4;opacity:.5;pointer-events:none;background-image:radial-gradient(oklch(1 0 0 / .04) 1px, transparent 1px);background-size:3px 3px}
 .hero .wrap{position:relative;z-index:5}
-.hero h1{text-shadow:0 2px 30px oklch(0.1 0.012 60 / .55)}
+.hero h1{font-size:clamp(30px,6.3vw,82px);line-height:1.04;text-wrap:balance;text-shadow:0 2px 30px oklch(0.1 0.012 60 / .55)}
 .hero .htop p,.hero .tagline{text-shadow:0 1px 18px oklch(0.1 0.012 60 / .5)}
 .htop{display:flex;justify-content:space-between;align-items:flex-start;gap:48px;margin-bottom:clamp(28px,4vw,48px);padding-bottom:26px;border-bottom:1px solid var(--line-soft);flex-wrap:wrap}
 .tagline{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);white-space:nowrap;padding-top:4px}
