@@ -54,12 +54,15 @@ nav.scrolled .wrap{height:68px}
 .menu-open .burger span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
 
 /* mobile menu */
-.mobile-menu{position:fixed;inset:0;z-index:190;background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:40px;opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .4s var(--e-out),transform .4s var(--e-out),visibility .4s}
+.mobile-menu{position:fixed;inset:0;z-index:190;background:var(--bg);display:flex;flex-direction:column;justify-content:center;padding:96px 34px 44px;opacity:0;visibility:hidden;transform:translateY(-12px);transition:opacity .4s var(--e-out),transform .4s var(--e-out),visibility .4s}
 .menu-open .mobile-menu{opacity:1;visibility:visible;transform:none}
-.mobile-menu a{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(34px,9vw,60px);letter-spacing:-.02em;padding:10px 0;color:var(--cream);border-bottom:1px solid var(--line-soft)}
-.mobile-menu a em{font-style:italic;color:var(--gold)}
-.mobile-menu .mm-contact{margin-top:34px;font-family:"Plus Jakarta Sans",sans-serif;font-size:15px;color:var(--muted);letter-spacing:.02em}
-.mobile-menu .mm-contact a{font-family:inherit;font-size:15px;color:var(--gold);border:0;padding:0}
+.mobile-menu a{display:flex;align-items:center;justify-content:space-between;font-family:"Plus Jakarta Sans",sans-serif;font-weight:500;font-size:clamp(20px,5.5vw,27px);letter-spacing:-.01em;padding:17px 2px;color:var(--cream);border-bottom:1px solid var(--line-soft);transition:color .25s var(--e-out)}
+.mobile-menu a::after{content:"↗";font-size:.62em;color:var(--gold);opacity:.6;transition:transform .25s var(--e-out),opacity .25s}
+.mobile-menu a:hover,.mobile-menu a:active{color:var(--gold)}
+.mobile-menu a:hover::after{opacity:1;transform:translateX(3px)}
+.mobile-menu .mm-contact{margin-top:30px;font-size:14px;line-height:1.6;color:var(--muted);letter-spacing:.01em}
+.mobile-menu .mm-contact a{font-size:14px;color:var(--gold);border:0;padding:0;display:inline}
+.mobile-menu .mm-contact a::after{content:none}
 
 /* buttons */
 .btn{position:relative;display:inline-flex;align-items:center;gap:12px;background:var(--cream);color:var(--bg);
