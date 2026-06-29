@@ -9,8 +9,9 @@
   --gold:oklch(0.78 0.115 75);
   --gold-deep:oklch(0.60 0.10 68);
   --brass:oklch(0.72 0.085 72);
-  --clay:oklch(0.60 0.15 33);
-  --steel:oklch(0.64 0.10 250);
+  --clay:oklch(0.585 0.185 30);
+  --steel:oklch(0.62 0.13 250);
+  --sun:oklch(0.84 0.155 92);
   --line:oklch(0.34 0.02 60 / .6);
   --line-soft:oklch(0.34 0.02 60 / .35);
   --e-out:cubic-bezier(0.16,1,0.3,1);
@@ -76,7 +77,7 @@ nav.scrolled .wrap{height:68px}
 .hero-photo{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
 .hero-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1}
 .hero-veil{position:absolute;inset:0;z-index:2;background:linear-gradient(to bottom, oklch(0.14 0.012 58 / .62) 0%, oklch(0.14 0.012 58 / .4) 40%, oklch(0.14 0.012 58 / .9) 100%)}
-.hero-bg{position:absolute;inset:0;z-index:3;background:radial-gradient(80% 60% at 75% 15%, oklch(0.78 0.115 75 / .14), transparent 60%),radial-gradient(55% 55% at 8% 18%, oklch(0.64 0.10 250 / .06), transparent 60%),radial-gradient(55% 55% at 92% 92%, oklch(0.60 0.15 33 / .05), transparent 60%),radial-gradient(70% 70% at 12% 95%, oklch(0.30 0.02 60 / .4), transparent 55%)}
+.hero-bg{position:absolute;inset:0;z-index:3;background:radial-gradient(80% 60% at 75% 15%, oklch(0.78 0.115 75 / .14), transparent 60%),radial-gradient(50% 55% at 6% 16%, oklch(0.62 0.13 250 / .12), transparent 62%),radial-gradient(48% 52% at 94% 90%, oklch(0.585 0.185 30 / .10), transparent 60%),radial-gradient(70% 70% at 12% 95%, oklch(0.30 0.02 60 / .4), transparent 55%)}
 .grain{position:absolute;inset:0;z-index:4;opacity:.5;pointer-events:none;background-image:radial-gradient(oklch(1 0 0 / .04) 1px, transparent 1px);background-size:3px 3px}
 .hero .wrap{position:relative;z-index:5}
 .hero h1{font-size:clamp(30px,6.3vw,82px);line-height:1.04;text-wrap:balance;text-shadow:0 2px 30px oklch(0.1 0.012 60 / .55)}
@@ -97,9 +98,9 @@ h1 em{font-style:italic;font-weight:400;color:var(--gold)}
 
 /* page hero (subpages) */
 .phero{position:relative;padding:170px 0 70px;border-bottom:1px solid var(--line);overflow:hidden}
-.phero::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(70% 80% at 85% 0%, oklch(0.78 0.115 75 / .1), transparent 60%),radial-gradient(50% 60% at 6% 10%, oklch(0.64 0.10 250 / .06), transparent 60%),radial-gradient(50% 60% at 95% 95%, oklch(0.60 0.15 33 / .05), transparent 60%)}
+.phero::before{content:"";position:absolute;inset:0;z-index:1;background:radial-gradient(70% 80% at 85% 0%, oklch(0.78 0.115 75 / .1), transparent 60%),radial-gradient(50% 60% at 4% 8%, oklch(0.62 0.13 250 / .12), transparent 62%),radial-gradient(48% 58% at 96% 96%, oklch(0.585 0.185 30 / .1), transparent 60%)}
 .phero.has-photo{padding-top:190px}
-.phero.has-photo .pbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center}
+.phero.has-photo .pbg{position:absolute;inset:0;z-index:0;background-size:cover;background-position:center 88%}
 .phero.has-photo .pbg::after{content:"";position:absolute;inset:0;background:linear-gradient(to right, oklch(0.14 0.012 58 / .92) 0%, oklch(0.14 0.012 58 / .72) 55%, oklch(0.14 0.012 58 / .55) 100%)}
 .phero .wrap{position:relative;z-index:2}
 .phero .wrap{position:relative;z-index:2}
@@ -186,6 +187,18 @@ section{position:relative}
 .trust{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:16px;overflow:hidden}
 .trust .t{background:var(--bg);padding:38px 30px}
 .trust .t .ico{color:var(--gold);font-size:22px;margin-bottom:14px;display:block}
+/* logo-colour accents rotated across numbered items & icons */
+.svc-grid .svc-card:nth-child(4n+2) .num{color:var(--steel)}
+.svc-grid .svc-card:nth-child(4n+3) .num{color:var(--clay)}
+.svc-grid .svc-card:nth-child(4n+4) .num{color:var(--sun)}
+.srow:nth-child(3n+2) .num{color:var(--steel)}
+.srow:nth-child(3n+3) .num{color:var(--clay)}
+.trust .t:nth-child(2) .ico{color:var(--steel)}
+.trust .t:nth-child(3) .ico{color:var(--clay)}
+.trust .t:nth-child(4) .ico{color:var(--sun)}
+.htrack .mat:nth-child(2) .cap .ix{color:var(--steel)}
+.htrack .mat:nth-child(3) .cap .ix{color:var(--clay)}
+.htrack .mat:nth-child(4) .cap .ix{color:var(--sun)}
 .trust .t h3{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:22px;letter-spacing:-.01em}
 .trust .t p{color:var(--muted);font-size:14px;margin-top:6px}
 @media(max-width:820px){.trust{grid-template-columns:repeat(2,1fr)}}
