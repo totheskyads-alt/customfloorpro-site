@@ -101,13 +101,7 @@
   if (reduce || !hasGSAP) return;
   gsap.registerPlugin(ScrollTrigger);
 
-  /* smooth scroll — DESKTOP ONLY (Lenis hurts touch scrolling) */
-  if (isDesktop && window.Lenis){
-    var lenis = new Lenis({ duration:1.1, easing:function(t){ return Math.min(1, 1.001 - Math.pow(2, -10*t)); } });
-    lenis.on('scroll', ScrollTrigger.update);
-    gsap.ticker.add(function(t){ lenis.raf(t*1000); });
-    gsap.ticker.lagSmoothing(0);
-  }
+  /* native scroll — no smooth-scroll library (it caused lag-then-jump on heavy pages) */
 
   /* magnetic buttons (pointer devices) */
   if (isDesktop){
