@@ -28,6 +28,17 @@
     });
   }
 
+  /* hero background video — ensure autoplay (muted) across browsers */
+  (function(){
+    var hv = document.querySelector('.hero-video');
+    if (!hv) return;
+    hv.muted = true;
+    var tryPlay = function(){ var p = hv.play(); if (p && p.catch) p.catch(function(){}); };
+    tryPlay();
+    document.addEventListener('visibilitychange', function(){ if (!document.hidden) tryPlay(); });
+    window.addEventListener('pointerdown', tryPlay, { once:true });
+  })();
+
   /* gapless grid masonry — sizes each item to its image height */
   (function(){
     var grids = document.querySelectorAll('.masonry');
