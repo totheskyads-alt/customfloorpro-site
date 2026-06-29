@@ -54,6 +54,35 @@
     window.addEventListener('load', all);
   })();
 
+  /* projects carousel — prev/next buttons + swipe */
+  (function(){
+    var track = document.getElementById('workTrack');
+    if (!track) return;
+    var prev = document.querySelector('[data-car="prev"]');
+    var next = document.querySelector('[data-car="next"]');
+    function step(){ var card = track.querySelector('.mat'); return card ? card.getBoundingClientRect().width + 20 : track.clientWidth * 0.85; }
+    function maxScroll(){ return track.scrollWidth - track.clientWidth; }
+    function animateTo(target){
+      target = Math.max(0, Math.min(target, maxScroll()));
+      var start = track.scrollLeft, dist = target - start;
+      if (Math.abs(dist) < 1) return;
+      var t0 = performance.now(), dur = 450;
+      function frame(now){ var p = Math.min(1, (now - t0) / dur); track.scrollLeft = start + dist * (1 - Math.pow(1 - p, 3)); if (p < 1) requestAnimationFrame(frame); }
+      requestAnimationFrame(frame);
+    }
+    function go(dir){ var s = step(); animateTo((Math.round(track.scrollLeft / s) + dir) * s); }
+    function update(){
+      if (!prev || !next) return;
+      prev.disabled = track.scrollLeft <= 4;
+      next.disabled = track.scrollLeft >= maxScroll() - 4;
+    }
+    if (prev) prev.addEventListener('click', function(){ go(-1); });
+    if (next) next.addEventListener('click', function(){ go(1); });
+    track.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('resize', update);
+    update();
+  })();
+
   var hasGSAP = window.gsap && window.ScrollTrigger;
   if (reduce || !hasGSAP) return;
   gsap.registerPlugin(ScrollTrigger);
@@ -100,14 +129,6 @@
   gsap.utils.toArray('.figure .img').forEach(function(img){
     gsap.to(img,{scale:1,duration:1.4,ease:'expo.out',scrollTrigger:{trigger:img,start:'top 88%'}});
   });
-
-  /* horizontal pinned gallery */
-  var track=document.querySelector('.htrack');
-  if (track && innerWidth>860){
-    var scrollLen=track.scrollWidth - innerWidth + 80;
-    gsap.to(track,{x:-scrollLen,ease:'none',
-      scrollTrigger:{trigger:'.hpin',start:'top top',end:'+='+scrollLen,scrub:1,pin:true,anticipatePin:1}});
-  }
 
   /* counters (data-to) */
   gsap.utils.toArray('.count').forEach(function(el){
