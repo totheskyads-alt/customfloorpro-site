@@ -126,6 +126,11 @@ section{position:relative}
 .figure{aspect-ratio:4/5;border-radius:14px;overflow:hidden;position:relative}
 .figure .img{position:absolute;inset:0;transform:scale(1.2);will-change:transform;background-position:center;background-size:cover}
 
+/* text-left / image-right feature block */
+.feature{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(40px,6vw,84px);align-items:center}
+.feature .eyebrow{margin-bottom:24px}
+.feature .figure{aspect-ratio:5/6;align-self:stretch}
+
 /* horizontal pinned gallery */
 .hpin{height:100svh;overflow:hidden;position:relative;background:var(--bg-2);border-block:1px solid var(--line)}
 .htrack{display:flex;height:100%;align-items:center;gap:34px;padding:0 40px;will-change:transform}
@@ -267,6 +272,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
   .nlinks{display:none}
   .burger{display:flex}
   .intro{grid-template-columns:1fr;gap:48px}
+  .feature{grid-template-columns:1fr;gap:38px}
+  .feature .figure{aspect-ratio:16/11}
   .figure{aspect-ratio:16/12}
   .svc-grid{grid-template-columns:1fr}
   .hpin{height:auto;border:0;padding:60px 0}
