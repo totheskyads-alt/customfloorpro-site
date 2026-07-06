@@ -385,6 +385,16 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
   .faq-item summary{padding:18px 20px;font-size:15.5px}
   .faq-item .faq-a{padding:0 20px 19px}
 }
+.legal-doc{max-width:820px}
+.legal-doc .legal-updated{color:var(--muted);font-size:13px;letter-spacing:.04em;margin:0 0 30px}
+.legal-doc h2{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(19px,2.3vw,25px);letter-spacing:-.01em;margin:38px 0 12px;color:var(--cream)}
+.legal-doc p{color:var(--muted);font-size:16px;line-height:1.72;margin:0 0 14px;max-width:70ch}
+.legal-doc a{color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(200,164,81,.3)}
+.legal-doc a.btn{border-bottom:0;color:inherit}
+.fbot .flegal{display:flex;gap:20px}
+.fbot .flegal a{color:var(--muted);text-decoration:none;transition:color .2s}
+.fbot .flegal a:hover{color:var(--gold)}
+@media (max-width:640px){.fbot .flegal{gap:16px}}
 @media (prefers-reduced-motion: reduce){
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .hero-video{display:none}
