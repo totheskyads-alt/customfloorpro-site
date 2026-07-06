@@ -366,6 +366,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
 .how-step:nth-child(2) .hn{color:var(--clay)}
 .how-step:nth-child(3) .hn{color:var(--steel)}
 .how-step:nth-child(4) .hn{color:var(--sun)}
+.how-step:nth-child(5) .hn{color:var(--clay)}
+.how-step:nth-child(6) .hn{color:var(--steel)}
 .how-step h3{font-size:19px;font-weight:600;margin:1px 0 7px;color:var(--cream)}
 .how-step p{font-size:15px;line-height:1.6;color:var(--muted);margin:0;max-width:62ch}
 
