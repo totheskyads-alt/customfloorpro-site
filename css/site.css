@@ -385,6 +385,8 @@ footer{border-top:1px solid var(--line);padding:70px 0 40px}
   .faq-item summary{padding:18px 20px;font-size:15.5px}
   .faq-item .faq-a{padding:0 20px 19px}
 }
+a.mat{text-decoration:none;color:inherit;cursor:pointer}
+.project{scroll-margin-top:96px}
 .legal-doc{max-width:820px}
 .legal-doc .legal-updated{color:var(--muted);font-size:13px;letter-spacing:.04em;margin:0 0 30px}
 .legal-doc h2{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:clamp(19px,2.3vw,25px);letter-spacing:-.01em;margin:38px 0 12px;color:var(--cream)}
