@@ -77,12 +77,12 @@
     cards.forEach(function(card){ card.addEventListener('click', function(){ play(card); }); });
   })();
 
-  /* carousels — prev/next buttons + swipe (supports multiple per page) */
-  document.querySelectorAll('.carousel').forEach(function(sec){
-    var track = sec.querySelector('.htrack');
-    if (!track) return;
-    var prev = sec.querySelector('[data-car="prev"]');
-    var next = sec.querySelector('[data-car="next"]');
+  /* carousels — prev/next buttons + swipe (each .htrack paired with its preceding nav) */
+  document.querySelectorAll('.htrack').forEach(function(track){
+    var nav = track.previousElementSibling;
+    while (nav && !(nav.querySelector && nav.querySelector('[data-car]'))) nav = nav.previousElementSibling;
+    var prev = nav && nav.querySelector('[data-car="prev"]');
+    var next = nav && nav.querySelector('[data-car="next"]');
     function gap(){ return parseFloat(getComputedStyle(track).columnGap) || 20; }
     function step(){ var card = track.firstElementChild; return card ? card.getBoundingClientRect().width + gap() : track.clientWidth * 0.85; }
     function maxScroll(){ return track.scrollWidth - track.clientWidth; }

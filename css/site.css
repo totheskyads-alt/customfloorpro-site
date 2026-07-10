@@ -229,6 +229,15 @@ section{position:relative}
 .ig-card .tt-views,.vtrack .tt-card .tt-views{white-space:nowrap;font-size:12.5px}
 .ig-card .tt-views b,.vtrack .tt-card .tt-views b{font-size:15px}
 .eyebrow svg{flex:none;margin-right:-4px}
+/* project photo carousels */
+.htrack.ptrack{padding:4px 0 16px;scroll-padding-left:0;gap:16px}
+.ptrack > a{flex:0 0 auto;width:min(80vw,380px);aspect-ratio:4/3;scroll-snap-align:start;border-radius:14px;overflow:hidden;display:block;background:var(--bg-2)}
+.ptrack > a > img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .6s var(--e-out)}
+.ptrack > a:hover > img{transform:scale(1.04)}
+.project .car-nav{margin:6px 0 20px}
+.csub{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:8px 0 10px;display:flex;align-items:center;gap:12px}
+.csub svg{flex:none}
+.vtrack-land video{flex:0 0 auto;width:min(66vw,256px);aspect-ratio:9/16;object-fit:cover;border-radius:14px;background:#000;scroll-snap-align:start;display:block}
 .vid{display:flex;flex-direction:column;gap:12px}
 .vviews{display:inline-flex;align-items:center;gap:9px;align-self:flex-start;background:var(--bg-2);border:1px solid var(--line);color:var(--cream);font-size:15px;padding:9px 16px 9px 10px;border-radius:100px}
 .vviews .pl{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:var(--gold);color:var(--bg);font-size:9px;padding-left:2px}
