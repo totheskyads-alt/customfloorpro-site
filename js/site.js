@@ -77,15 +77,16 @@
     cards.forEach(function(card){ card.addEventListener('click', function(){ play(card); }); });
   })();
 
-  /* Instagram — preview the reel inline in a modal (embed still links out to Instagram) */
+  /* Instagram — if a self-hosted mp4 exists (data-mp4), preview it inline in a modal;
+     otherwise the card is a normal link that opens the reel on Instagram. */
   (function(){
     var cards = document.querySelectorAll('.ig-card');
     var modal = document.getElementById('igModal');
     if (!cards.length || !modal) return;
     var body = modal.querySelector('.ig-modal-body');
     var link = modal.querySelector('.ig-modal-link');
-    function open(code, href){
-      body.innerHTML = '<iframe src="https://www.instagram.com/reel/' + code + '/embed/" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen title="Instagram reel"></iframe>';
+    function open(mp4, poster, href){
+      body.innerHTML = '<video controls autoplay playsinline preload="auto"' + (poster ? ' poster="' + poster + '"' : '') + '><source src="' + mp4 + '" type="video/mp4"></video>';
       if (link && href) link.href = href;
       modal.classList.add('open');
       modal.setAttribute('aria-hidden', 'false');
@@ -93,7 +94,13 @@
     }
     function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); body.innerHTML = ''; document.documentElement.style.overflow = ''; }
     cards.forEach(function(card){
-      card.addEventListener('click', function(e){ e.preventDefault(); open(card.getAttribute('data-code'), card.getAttribute('href')); });
+      card.addEventListener('click', function(e){
+        var mp4 = card.getAttribute('data-mp4');
+        if (!mp4) return; /* no hosted video yet → let the link open Instagram */
+        e.preventDefault();
+        var img = card.querySelector('img');
+        open(mp4, img && img.getAttribute('src'), card.getAttribute('href'));
+      });
     });
     modal.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', close); });
     document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
