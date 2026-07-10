@@ -77,6 +77,28 @@
     cards.forEach(function(card){ card.addEventListener('click', function(){ play(card); }); });
   })();
 
+  /* Instagram — preview the reel inline in a modal (embed still links out to Instagram) */
+  (function(){
+    var cards = document.querySelectorAll('.ig-card');
+    var modal = document.getElementById('igModal');
+    if (!cards.length || !modal) return;
+    var body = modal.querySelector('.ig-modal-body');
+    var link = modal.querySelector('.ig-modal-link');
+    function open(code, href){
+      body.innerHTML = '<iframe src="https://www.instagram.com/reel/' + code + '/embed/" scrolling="no" allowtransparency="true" allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share" allowfullscreen title="Instagram reel"></iframe>';
+      if (link && href) link.href = href;
+      modal.classList.add('open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.documentElement.style.overflow = 'hidden';
+    }
+    function close(){ modal.classList.remove('open'); modal.setAttribute('aria-hidden','true'); body.innerHTML = ''; document.documentElement.style.overflow = ''; }
+    cards.forEach(function(card){
+      card.addEventListener('click', function(e){ e.preventDefault(); open(card.getAttribute('data-code'), card.getAttribute('href')); });
+    });
+    modal.querySelectorAll('[data-close]').forEach(function(el){ el.addEventListener('click', close); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape' && modal.classList.contains('open')) close(); });
+  })();
+
   /* carousels — prev/next buttons + swipe (each .htrack paired with its preceding nav) */
   document.querySelectorAll('.htrack').forEach(function(track){
     var nav = track.previousElementSibling;
