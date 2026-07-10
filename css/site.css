@@ -451,3 +451,10 @@ a.mat{text-decoration:none;color:inherit;cursor:pointer}
 .cred-list .cl-t{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:16px;color:var(--cream)}
 .cred-list .cl-d{color:var(--muted);font-size:14px;line-height:1.62;max-width:60ch}
 @media(max-width:720px){.creds{grid-template-columns:1fr;gap:28px;padding:26px}.cred-badge{justify-self:start;min-width:0;width:100%;max-width:300px}}
+/* credentials — Home compact band */
+.creds-home{display:grid;grid-template-columns:auto 1fr;gap:40px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:30px 36px;background:var(--bg-2)}
+.creds-home .cred-badge{min-width:200px;min-height:132px;padding:22px 26px}
+.creds-home .cred-badge img{max-width:200px}
+.creds-home-txt h3{font-family:"Plus Jakarta Sans",sans-serif;font-weight:400;font-size:clamp(18px,2.1vw,23px);letter-spacing:-.01em;color:var(--cream);margin:0 0 8px;max-width:28ch}
+.creds-home-txt p{color:var(--muted);font-size:14.5px;line-height:1.62;max-width:60ch;margin:0}
+@media(max-width:720px){.creds-home{grid-template-columns:1fr;gap:22px;padding:24px}.creds-home .cred-badge{justify-self:start;width:100%;max-width:280px}}
