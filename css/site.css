@@ -436,3 +436,18 @@ a.mat{text-decoration:none;color:inherit;cursor:pointer}
   *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
   .hero-video{display:none}
 }
+/* credentials (About) */
+.creds{display:grid;grid-template-columns:auto 1fr;gap:44px;align-items:center;border:1px solid var(--line);border-radius:16px;padding:34px 38px;background:var(--bg-2)}
+.cred-badge{background:#fff;border-radius:14px;padding:26px 30px;display:flex;align-items:center;justify-content:center;min-width:230px;min-height:150px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.cred-badge img{display:block;max-width:240px;width:100%;height:auto}
+.cred-badge-fallback{display:none;text-align:center;line-height:1.05;font-family:"Plus Jakarta Sans",sans-serif}
+.cred-badge.nofile .cred-badge-fallback{display:block}
+.cred-badge-fallback b{display:block;font-size:46px;font-weight:800;letter-spacing:-.03em;color:#5b4327}
+.cred-badge-fallback span{display:block;font-size:11.5px;font-weight:600;color:#6f8a3a;margin-top:5px}
+.cred-badge-fallback em{display:block;font-style:normal;letter-spacing:.3em;font-size:12px;font-weight:700;color:#5b4327;margin-top:9px;border-top:1px solid #ddd2c0;padding-top:7px}
+.cred-list{list-style:none;margin:0;padding:0;display:grid;gap:20px}
+.cred-list li{display:grid;gap:3px;position:relative;padding-left:24px}
+.cred-list li:before{content:"";position:absolute;left:0;top:6px;width:13px;height:13px;border-radius:50%;background:var(--gold);opacity:.9}
+.cred-list .cl-t{font-family:"Plus Jakarta Sans",sans-serif;font-weight:600;font-size:16px;color:var(--cream)}
+.cred-list .cl-d{color:var(--muted);font-size:14px;line-height:1.62;max-width:60ch}
+@media(max-width:720px){.creds{grid-template-columns:1fr;gap:28px;padding:26px}.cred-badge{justify-self:start;min-width:0;width:100%;max-width:300px}}
