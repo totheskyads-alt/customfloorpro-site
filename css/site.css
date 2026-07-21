@@ -470,3 +470,17 @@ a.mat{text-decoration:none;color:inherit;cursor:pointer}
 .ig-modal-body video{display:block;width:100%;height:min(82vh,720px);object-fit:contain;background:#000;border:0}
 .ig-modal-link{display:block;text-align:center;margin-top:16px;color:var(--cream);font-size:14px;letter-spacing:.02em;text-decoration:none;opacity:.85;transition:opacity .2s,color .2s}
 .ig-modal-link:hover{color:var(--gold);opacity:1}
+/* founder quote with portrait photo */
+.founder-quote{display:grid;grid-template-columns:minmax(240px,340px) 1fr;gap:clamp(30px,5vw,66px);align-items:center;text-align:left}
+.founder-photo{margin:0;width:100%;aspect-ratio:4/5;border-radius:18px;overflow:hidden;background:var(--bg-2)}
+.founder-photo img{width:100%;height:100%;object-fit:cover;object-position:center 20%;display:block}
+.founder-quote blockquote{max-width:20ch;margin:0}
+.founder-quote cite{margin-top:28px}
+.founder-quote.no-photo{display:block;text-align:center}
+.founder-quote.no-photo .founder-photo{display:none}
+.founder-quote.no-photo blockquote{max-width:22ch;margin:0 auto}
+@media(max-width:760px){
+  .founder-quote{grid-template-columns:1fr;justify-items:center;text-align:center;gap:30px}
+  .founder-photo{width:min(72vw,300px)}
+  .founder-quote blockquote{max-width:22ch;margin:0 auto}
+}
