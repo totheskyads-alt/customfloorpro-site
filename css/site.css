@@ -484,3 +484,7 @@ a.mat{text-decoration:none;color:inherit;cursor:pointer}
   .founder-photo{width:min(72vw,300px)}
   .founder-quote blockquote{max-width:22ch;margin:0 auto}
 }
+/* reviews carousel */
+.tm-track{margin-top:10px}
+.tm-track > .tm-card{flex:0 0 auto;width:min(84vw,400px);scroll-snap-align:start}
+.reveals .tm-track .reveal-fade{opacity:1;transform:none}
