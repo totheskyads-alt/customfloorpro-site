@@ -488,3 +488,11 @@ a.mat{text-decoration:none;color:inherit;cursor:pointer}
 .tm-track{margin-top:10px}
 .tm-track > .tm-card{flex:0 0 auto;width:min(84vw,400px);scroll-snap-align:start}
 .reveals .tm-track .reveal-fade{opacity:1;transform:none}
+/* training & certifications (About credentials) */
+.csub2{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:44px 0 16px}
+.cert-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
+.cert{display:block;text-decoration:none;color:inherit;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg-2);transition:transform .35s var(--e-out),border-color .3s}
+.cert:hover{transform:translateY(-4px);border-color:var(--gold)}
+.cert img{width:100%;height:auto;display:block;background:#fff}
+.cert-cap{display:block;padding:13px 15px;font-size:12.5px;color:var(--muted);line-height:1.5}
+.cert-cap b{display:block;color:var(--cream);font-weight:600;font-size:13.5px;margin-bottom:3px}
