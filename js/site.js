@@ -24,15 +24,35 @@
     qf.addEventListener('submit', function(){ var b = qf.querySelector('.btn span'); if (b) b.textContent = 'Sending…'; });
   });
 
-  /* hero background video — ensure muted autoplay */
+  /* hero background video — ensure muted autoplay (insistent: unele browsere
+     refuza primul play(), iar userul vedea videoul pornind abia dupa scroll) */
   (function(){
     var hv = document.querySelector('.hero-video');
     if (!hv) return;
-    hv.muted = true;
-    var tryPlay = function(){ var p = hv.play(); if (p && p.catch) p.catch(function(){}); };
+    hv.muted = true; hv.defaultMuted = true;
+    hv.setAttribute('muted','');
+    hv.setAttribute('playsinline','');
+    hv.setAttribute('webkit-playsinline','');
+    var done = false;
+    var tryPlay = function(){
+      if (done || !hv.paused) { done = !hv.paused; return; }
+      var p = hv.play();
+      if (p && p.then) p.then(function(){ done = true; }).catch(function(){});
+    };
     tryPlay();
+    /* reincearca de indata ce sunt date de redat */
+    ['loadedmetadata','loadeddata','canplay','canplaythrough'].forEach(function(ev){
+      hv.addEventListener(ev, tryPlay);
+    });
+    /* cateva reincercari in primele secunde */
+    [200, 600, 1200, 2500].forEach(function(ms){ setTimeout(tryPlay, ms); });
+    /* daca browserul chiar cere un gest, prinde-l pe primul, oricare ar fi */
+    ['pointerdown','touchstart','scroll','keydown'].forEach(function(ev){
+      window.addEventListener(ev, tryPlay, { once:true, passive:true });
+    });
     document.addEventListener('visibilitychange', function(){ if (!document.hidden) tryPlay(); });
-    window.addEventListener('pointerdown', tryPlay, { once:true });
+    /* daca s-a oprit singur (ex. iesire din prim-plan), reporneste */
+    hv.addEventListener('pause', function(){ if (!document.hidden) { done = false; setTimeout(tryPlay, 120); } });
   })();
 
   /* lightweight reveals via IntersectionObserver (no scroll handlers) */
