@@ -3,6 +3,17 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- Consent Mode v2 — stari implicite, TREBUIE sa ruleze inaintea GTM -->
+<script>
+window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}
+/* In SEE, UK si Elvetia totul e refuzat pana la accept (prior blocking). */
+gtag('consent','default',{'ad_storage':'denied','analytics_storage':'denied','ad_user_data':'denied','ad_personalization':'denied','region':['EEA','GB','CH'],'wait_for_update':500});
+/* In rest (clientii lui din Arizona) masurarea merge implicit; bannerul ramane si permite refuzul. */
+gtag('consent','default',{'ad_storage':'granted','analytics_storage':'granted','ad_user_data':'granted','ad_personalization':'granted'});
+/* Alegerea salvata anterior bate valorile implicite. */
+try{var _c=localStorage.getItem('cfp_consent_v1');if(_c){gtag('consent','update',JSON.parse(_c));}}catch(e){}
+</script>
+<!-- End Consent Mode v2 -->
 <!-- Google Tag Manager -->
 <script>window.dataLayer=window.dataLayer||[];(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -118,11 +129,12 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     </div>
     <div class="fbot">
       <span>© 2026 Custom Flooring Projects LLC · Licensed, bonded &amp; insured · ROC 342486</span>
-      <span class="flegal"><a href="privacy.html">Privacy Policy</a><a href="terms.html">Terms of Service</a></span>
+      <span class="flegal"><a href="privacy.html">Privacy Policy</a><a href="cookies.html">Cookie Policy</a><a href="terms.html">Terms of Service</a><a href="#" data-cookie-settings>Cookie settings</a></span>
     </div>
   </div>
 </footer>
 
 <script src="js/site.js?v=39"></script>
+<script src="js/consent.js?v=1" defer></script>
 </body>
 </html>
