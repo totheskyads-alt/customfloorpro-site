@@ -251,13 +251,13 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <input type="hidden" name="_next" value="https://customflooringprojects.com/thank-you.html">
       <input type="text" name="_honey" style="display:none">
       <div class="frow">
-        <div><label>Full name</label><input type="text" name="name" required placeholder="Your name"></div>
-        <div><label>Phone</label><input type="tel" name="phone" required placeholder="(000) 000-0000"></div>
+        <div><label for="f-about-name">Full name</label><input id="f-about-name" type="text" name="name" required placeholder="Your name"></div>
+        <div><label for="f-about-phone">Phone</label><input id="f-about-phone" type="tel" name="phone" required placeholder="(000) 000-0000"></div>
       </div>
-      <label>Email</label>
-      <input type="email" name="email" required placeholder="you@email.com">
-      <label>Project type</label>
-      <select name="project_type" required>
+      <label for="f-about-email">Email</label>
+      <input id="f-about-email" type="email" name="email" required placeholder="you@email.com">
+      <label for="f-about-project_type">Project type</label>
+      <select id="f-about-project_type" name="project_type" required>
         <option value="" disabled selected>Choose a service…</option>
         <option>Custom engineered / hardwood installation</option>
         <option>Custom flooring design</option>
@@ -270,11 +270,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <option>Other / not sure yet</option>
       </select>
       <div class="frow">
-        <div><label>City</label><input type="text" name="city" required placeholder="City"></div>
-        <div><label>State</label><input type="text" name="state" required placeholder="AZ"></div>
+        <div><label for="f-about-city">City</label><input id="f-about-city" type="text" name="city" required placeholder="City"></div>
+        <div><label for="f-about-state">State</label><input id="f-about-state" type="text" name="state" required placeholder="AZ"></div>
       </div>
-      <label>When would you like to start?</label>
-      <select name="start_time" required>
+      <label for="f-about-start_time">When would you like to start?</label>
+      <select id="f-about-start_time" name="start_time" required>
         <option value="" disabled selected>Choose a timeframe…</option>
         <option>As soon as possible</option>
         <option>Within 1 month</option>
@@ -282,8 +282,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <option>3+ months</option>
         <option>Just exploring</option>
       </select>
-      <label>About the project</label>
-      <textarea name="message" required placeholder="Rooms, square footage, the look you're after…"></textarea>
+      <label for="f-about-message">About the project</label>
+      <textarea id="f-about-message" name="message" required placeholder="Rooms, square footage, the look you're after…"></textarea>
       <button type="submit" class="btn"><span>Request a free estimate</span><span class="ar" aria-hidden="true">↗</span></button>
     </form>
   </div>
