@@ -55,6 +55,40 @@
     hv.addEventListener('pause', function(){ if (!document.hidden) { done = false; setTimeout(tryPlay, 120); } });
   })();
 
+  /* Videoclipurile din pagina (nu hero-ul, el are logica lui):
+     iOS nu porneste mereu autoplay singur, mai ales pe economie de baterie.
+     Le pornim cand intra in ecran si le oprim cand ies, ca sa nu manance date. */
+  (function(){
+    var vids = Array.prototype.slice.call(document.querySelectorAll('video[autoplay]:not(.hero-video)'));
+    if (!vids.length) return;
+    function play(v){
+      if (!v || !v.paused) return;
+      var p = v.play();
+      if (p && p.catch) p.catch(function(){ /* blocat de browser, ramane posterul */ });
+    }
+    if ('IntersectionObserver' in window){
+      var vio = new IntersectionObserver(function(entries){
+        entries.forEach(function(e){
+          if (e.isIntersecting) play(e.target);
+          else if (!e.target.paused) { try { e.target.pause(); } catch(err){} }
+        });
+      }, { threshold: 0.2 });
+      vids.forEach(function(v){ vio.observe(v); });
+    } else {
+      vids.forEach(play);
+    }
+    /* daca browserul cere neaparat un gest al utilizatorului, prindem primul */
+    ['pointerdown','touchstart','keydown'].forEach(function(ev){
+      window.addEventListener(ev, function(){ vids.forEach(play); }, { once:true, passive:true });
+    });
+    document.addEventListener('visibilitychange', function(){
+      if (!document.hidden) vids.forEach(function(v){
+        var r = v.getBoundingClientRect();
+        if (r.top < innerHeight && r.bottom > 0) play(v);
+      });
+    });
+  })();
+
   /* lightweight reveals via IntersectionObserver (no scroll handlers) */
   if (!reduce && 'IntersectionObserver' in window){
     document.documentElement.classList.add('reveals');
