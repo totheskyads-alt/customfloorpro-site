@@ -96,6 +96,15 @@
       entries.forEach(function(e){ if (e.isIntersecting){ e.target.classList.add('in'); rio.unobserve(e.target); } });
     }, { rootMargin: '0px 0px -6% 0px', threshold: 0.06 });
     document.querySelectorAll('.reveal-fade, .reveal-line').forEach(function(el){ rio.observe(el); });
+    /* plasa de siguranta: daca observatorul nu s-a declansat (telefon lent,
+       scroll propriu, fila in fundal la incarcare), elementele care sunt deja
+       in ecran raman invizibile. Le aratam fortat dupa doua secunde. */
+    setTimeout(function(){
+      document.querySelectorAll('.reveal-fade:not(.in), .reveal-line:not(.in)').forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('in');
+      });
+    }, 2000);
   }
 
   /* gapless grid masonry — sizes each item to its image height (once per image) */
