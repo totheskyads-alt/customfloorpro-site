@@ -517,3 +517,8 @@ a.mat{text-decoration:none;color:inherit;cursor:pointer}
 @media(max-width:560px){.fgrid .fmap{grid-column:span 2}}
 @media (prefers-reduced-motion: reduce){.fmap-pin::after{animation:none}}
 .fcol a[href^="mailto:"]{overflow-wrap:anywhere}
+
+/* Emailul de 32 de caractere nu se rupe, deci forta coloana de grid sa creasca
+   si scotea pagina din ecran pe telefon (435px continut pe un ecran de 375). */
+.contact-grid > *{min-width:0}
+a[href^="mailto:"]{overflow-wrap:anywhere}
