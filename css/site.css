@@ -358,7 +358,7 @@ form.quote .hint{font-size:12.5px;color:var(--faint);margin-top:14px;text-align:
 footer{border-top:1px solid var(--line);padding:70px 0 40px}
 .fgrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:50px}
 .fgrid .fbrand p{color:var(--muted);font-size:15px;max-width:34ch;margin-top:18px}
-.fcol h4{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
+.fcol h3{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:18px}
 .fcol a,.fcol p{display:block;color:var(--muted);font-size:15px;margin-bottom:11px;transition:color .3s}
 .fcol a:hover{color:var(--cream)}
 .fbot{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:14px;color:var(--faint);font-size:13px;border-top:1px solid var(--line);padding-top:28px}

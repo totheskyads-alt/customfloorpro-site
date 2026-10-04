@@ -59,7 +59,7 @@
      iOS nu porneste mereu autoplay singur, mai ales pe economie de baterie.
      Le pornim cand intra in ecran si le oprim cand ies, ca sa nu manance date. */
   (function(){
-    var vids = Array.prototype.slice.call(document.querySelectorAll('video[autoplay]:not(.hero-video)'));
+    var vids = Array.prototype.slice.call(document.querySelectorAll('video[autoplay]:not(.hero-video), video[data-autoplay]'));
     if (!vids.length) return;
     function play(v){
       if (!v || !v.paused) return;
