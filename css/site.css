@@ -5,7 +5,7 @@
   --panel:oklch(0.225 0.018 58);
   --cream:oklch(0.955 0.013 85);
   --muted:oklch(0.70 0.018 75);
-  --faint:oklch(0.52 0.02 65);
+  --faint:oklch(0.595 0.02 65);
   --gold:oklch(0.78 0.115 75);
   --gold-deep:oklch(0.60 0.10 68);
   --brass:oklch(0.72 0.085 72);
@@ -522,3 +522,13 @@ a.mat{text-decoration:none;color:inherit;cursor:pointer}
    si scotea pagina din ecran pe telefon (435px continut pe un ecran de 375). */
 .contact-grid > *{min-width:0}
 a[href^="mailto:"]{overflow-wrap:anywhere}
+
+/* WCAG 2.2 (2.5.8): zona de atins minim 24px.
+   La footer marim padding-ul si scadem marginea cu aceeasi valoare,
+   deci randurile raman exact unde erau.
+   La nav si la bara legala folosim un strat invizibil, ca sa nu
+   miscam bara de sus si nici sublinierea de hover. */
+.fcol a{padding:2px 0;margin-bottom:9px}
+.nlinks a::before{content:"";position:absolute;inset:-6px -4px;z-index:0}
+.fbot .flegal a{position:relative}
+.fbot .flegal a::before{content:"";position:absolute;inset:-6px -3px}
